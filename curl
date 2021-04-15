@@ -1,0 +1,43 @@
+curl -v -X GET http://localhost:8080/api/v1/persons/
+
+curl -v -X GET http://localhost:8080/api/v1/persons/1
+
+curl -v -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"name":"test","age":"44"}' \
+    http://localhost:8080/api/v1/persons/
+
+curl -v -X PUT \
+    -H "Content-Type: application/json" \
+    -d '{"id":"4","name":"test","age":"443"}' \
+    http://localhost:8080/api/v1/persons/
+
+curl -v -X PATCH \
+    -H "Content-Type: application/json" \
+    -d '{"id":"4","name":"test11"}' \
+    http://localhost:8080/api/v1/persons/
+
+curl -v -X DELETE \
+    -H "Content-Type: application/json" \
+    http://localhost:8080/api/v1/persons/1
+
+
+TEST 1
+curl -v -X POST -H "Content-Type: application/json" -d '{"name":"test1","email":"test1@mail.ru","birthday":"2000-01-01","phone":"8(916)1234567","city":"Moscow"}' http://localhost:8080/api/v1/persons/
+curl -v -X POST -H "Content-Type: application/json" -d '{"name":"test2","email":"test2@mail.ru","birthday":"2000-04-12","phone":"8(916)7654211","city":"Tula"}' http://localhost:8080/api/v1/persons/
+curl -v -X POST -H "Content-Type: application/json" -d '{"name":"test3","email":"test3@mail.ru","birthday":"2003-10-23","phone":"8(916)4561287","city":"Ryazan"}' http://localhost:8080/api/v1/persons/
+curl -v -X PUT -H "Content-Type: application/json" -d '{"id":101,"name":"test4","email":"test1@mail.ru","birthday":"2010-10-23","phone":"8(916)6561287","city":"Kazan"}' http://localhost:8080/api/v1/persons/
+curl -v -X PUT -H "Content-Type: application/json" -d '{"id":101,"name":"test1","email":"test2@mail.ru","birthday":"2010-10-23","phone":"8(916)6561287","city":"Kazan"}' http://localhost:8080/api/v1/persons/
+curl -v -X PUT -H "Content-Type: application/json" -d '{"id":101,"name":"test2","email":"test4@mail.ru","birthday":"2010-10-23","phone":"8(916)6561287","city":"Kazan"}' http://localhost:8080/api/v1/persons/
+
+
+TEST 2
+curl -v -X POST -H "Content-Type: application/json" -d '{"name":"test1","email":"test1@mail.ru","birthday":"2000-01-01","phone":"8(916)1234567","city":"Moscow"}' http://localhost:8080/api/v1/persons/
+curl -v -X POST -H "Content-Type: application/json" -d '{"name":"test2","email":"test2@mail.ru","birthday":"2000-04-12","phone":"8(916)7654211","city":"Tula"}' http://localhost:8080/api/v1/persons/
+curl -v -X PATCH -H "Content-Type: application/json" -d '{"id":"101","name":"test11"}' http://localhost:8080/api/v1/people/
+curl -v -X PATCH -H "Content-Type: application/json" -d '{"id":"101","name":"test2","email":"test2@mail.ru"}' http://localhost:8080/api/v1/persons/
+curl -v -X PATCH -H "Content-Type: application/json" -d '{"id":"101","name":"test4","email":"test4@mail.ru"}' http://localhost:8080/api/v1/persons/
+
+TEST 3
+curl -v -X GET "http://localhost:8080/api/v1/persons/search?q=(name=test1)"
+curl -v -X GET "http://localhost:8080/api/v1/persons/search?q=(email~.edu%20OR%20(birthday%3E2000-01-01%20AND%20birthday%3C2002-12-31))"

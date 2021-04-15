@@ -1,0 +1,39 @@
+( name=dsada || (email!=qwey && email~qw@dsa.ew) )
+
+    or
+name    and
+    email   email
+
+and: "&&"
+or: "||"
+equals: "=" or "!="
+like: "~" or "!~"
+more: ">"
+more or equals: ">="
+less: "<"
+less or equals: "<="
+
+//        queryString = "  (name=dsada | (email!=qwey & email~qw@dsa.ew)   )   ";
+//        String queryString1 = "  ((name=dsada & birthday!=2000-03-21) | (email!=qwey & email~qw@dsa.ew)   )   ";
+//        String queryString2 = "  (name=dsada | (email!=qwey & email~qw@dsa.ew   )   ";
+//        String queryString3 = "  (name=dsada | email!=qwey & email~qw@dsa.ew)   )   ";
+
+
+SELECT u.id,u.login,u.encryptedpassword,u.enabled,ur.role_id
+FROM users u
+     JOIN users_roles ur on user_id = u.id
+WHERE u.id =1
+LIMIT 1
+
+// It works!
+SELECT u.id, u.login, GROUP_CONCAT(ur.role_id SEPARATOR ',') roles FROM users u LEFT JOIN users_roles ur on u.id = ur.user_id WHERE u.id=1 GROUP BY u.id, u.login
+
+SELECT
+    u.id,
+    u.login,
+    GROUP_CONCAT(ur.role_id SEPARATOR ',')  roles
+FROM users u
+LEFT JOIN users_roles ur on u.id = ur.user_id
+GROUP BY
+    u.id,
+    u.login
